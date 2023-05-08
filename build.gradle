@@ -1,9 +1,11 @@
 plugins {
     id 'java'
+    id 'maven-publish'
+    id 'org.ajoberstar.grgit' version '5.2.0'
 }
 
 group 'com.zvyap'
-version '1.0-SNAPSHOT'
+version = "${getProjectVersion()}"
 
 repositories {
     mavenCentral()
@@ -23,4 +25,44 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+
+jar.mustRunAfter clean
+publishToMavenLocal.dependsOn jar
+// called by jitpack
+task install {
+    dependsOn test
+    dependsOn publishToMavenLocal
+    doLast {
+        println 'Version: ' + version
+    }
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier 'sources'
+}
+
+task version() {
+    doFirst {
+        println getProjectVersion()
+    }
+}
+
+String getProjectVersion() {
+    if(grgit == null) { //No git found
+        return "LOCAL"
+    }
+    def headTag = grgit.tag.list().find {
+        it.commit == grgit.head()
+    }
+
+    def clean = grgit.status().clean
+
+    if (headTag && clean) {
+        headTag.getName()
+    } else {
+        "${grgit.head().id}-SNAPSHOT"
+    }
 }
