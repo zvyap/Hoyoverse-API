@@ -50,6 +50,19 @@ task version() {
     }
 }
 
+afterEvaluate {
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                groupId 'com.github.zvyap'
+                artifactId "Hoyoverse-API"
+                version project.version
+            }
+        }
+    }
+}
+
 String getProjectVersion() {
     if(grgit == null) { //No git found
         return "LOCAL"
