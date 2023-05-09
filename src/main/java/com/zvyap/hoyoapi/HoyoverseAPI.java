@@ -31,7 +31,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.CompletableFuture;
@@ -47,7 +46,7 @@ public class HoyoverseAPI {
     }
 
     @NotNull
-    public static HoyoverseAPI buildGlobalInstance(APIEnvironment environment, Locale locale) {
+    public static HoyoverseAPI buildGlobalInstance(APIEnvironment environment, APILocale locale) {
         if (globalInstance == null) {
             globalInstance = new HoyoverseAPI(environment, locale);
         }
@@ -63,11 +62,19 @@ public class HoyoverseAPI {
     @Getter
     private boolean isHeaderSafe;
 
+    /**
+     * @param environment APIEnvironment
+     */
     public HoyoverseAPI(APIEnvironment environment) {
-        this(environment, Locale.US);
+        this(environment, APILocale.EN_US);
     }
 
-    public HoyoverseAPI(APIEnvironment environment, Locale locale) {
+
+    /**
+     * @param environment APIEnvironment
+     * @param locale APILocale
+     */
+    public HoyoverseAPI(APIEnvironment environment, APILocale locale) {
         tryToAllowRestricedHeader();
         this.httpClient = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_2)
@@ -75,9 +82,9 @@ public class HoyoverseAPI {
                 .build();
         this.environment = environment;
         if (locale == null) {
-            locale = Locale.ENGLISH;
+            locale = APILocale.EN_US;
         }
-        this.lang = Locale.US.toString().replace("_", "-").toLowerCase();
+        this.lang = locale.getValue();
 
     }
 
@@ -120,16 +127,37 @@ public class HoyoverseAPI {
         }
     }
 
+    /**
+     * Get game roles with some filter
+     *
+     * @param token HoyoToken
+     * @return A list of all game roles in this account
+     */
     @NotNull
     public List<HoyoGameRole> getGameRoles(@NotNull HoyoToken token) {
         return getGameRoles(token, (GameType) null);
     }
 
+    /**
+     * Get game roles with some filter
+     *
+     * @param token HoyoToken
+     * @param type GameType
+     * @return A list of game roles of the game type with all region
+     */
     @NotNull
     public List<HoyoGameRole> getGameRoles(@NotNull HoyoToken token, @Nullable GameType type) {
         return Utils.ifNullGetEmptyList(Utils.getUserGameRoles(this, token, type, null).body().get().getData(), HoyoGetUserGameRolesResponse.Data::getRoles);
     }
 
+    /**
+     * Get game role by UID with GameType filter
+     *
+     * @param token HoyoToken
+     * @param type GameType
+     * @param uid In game UID
+     * @return Game role information
+     */
     @Nullable
     public HoyoGameRole getGameRoles(@NotNull HoyoToken token, @Nullable GameType type, String uid) {
         for (HoyoGameRole role : getGameRoles(token, type)) {
@@ -140,11 +168,26 @@ public class HoyoverseAPI {
         return null;
     }
 
+    /**
+     * Get game role by UID
+     *
+     * @param token HoyoToken
+     * @param uid In game UID
+     * @return Game role information
+     */
     @Nullable
     public HoyoGameRole getGameRoles(@NotNull HoyoToken token, @Nullable String uid) { //uid null will return null
         return getGameRoles(token, null, uid);
     }
 
+    /**
+     * Get game role with filter
+     *
+     * @param token HoyoToken
+     * @param type GameType
+     * @param region ServerRegion
+     * @return Game role information
+     */
     @Nullable
     public HoyoGameRole getGameRoles(@NotNull HoyoToken token, @Nullable GameType type, @Nullable ServerRegion region) {
         for (HoyoGameRole role : getGameRoles(token, type)) {
@@ -155,6 +198,13 @@ public class HoyoverseAPI {
         return null;
     }
 
+    /**
+     * Get game role with filter
+     *
+     * @param token HoyoToken
+     * @param region ServerRegion
+     * @return
+     */
     @NotNull
     public List<HoyoGameRole> getGameRoles(@NotNull HoyoToken token, @Nullable ServerRegion region) {
         List<HoyoGameRole> roles = new ArrayList<>();
@@ -166,16 +216,42 @@ public class HoyoverseAPI {
         return roles;
     }
 
+    /**
+     * Get user forum profile via account Id
+     *
+     * WARN: This request is fat, be careful
+     *
+     * @param accountId You can get this in url when you visit a user profile in forum, same as {@link HoyoToken#getLtuid()}
+     * @return
+     */
     @NotNull
     public HoyoGetForumFullUserResponse getForumUser(@NotNull String accountId) {
         return Utils.getForumUser(this, accountId).body().get();
     }
 
+    /**
+     * Get user forum profile via token object
+     *
+     * WARN: This request is fat, be careful
+     *
+     * @param token HoyoToken, see also {@link this#getForumUser(String)}
+     * @return
+     */
     @NotNull
     public HoyoGetForumFullUserResponse getForumUser(@NotNull HoyoToken token) {
         return Utils.getForumUser(this, token.getLtuid()).body().get();
     }
 
+    /**
+     * Get account information of this token
+     * Note: Some sensitive data such as: [username, email] will be blur
+     *
+     * For example: abc*****@gmail.com, ab****g
+     *
+     * @param token
+     * @return
+     */
+    @NotNull
     public HoyoGetUserAccountInfoResponse getAccountInfo(HoyoToken token) {
         return makeRequest(token,
                 buildRequest(URI.create(getEnvironment().getAccountAPIConstant().getUserAccountInfoEndpoint()),

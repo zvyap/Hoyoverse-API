@@ -20,7 +20,6 @@ import java.util.Locale;
 public class HonkaiStarRailDailyCheckInTest {
 
     private HoyoverseAPI osAPI = new HoyoverseAPI(APIEnvironment.OVERSEA);
-    private HoyoverseAPI osCHINA = new HoyoverseAPI(APIEnvironment.CHINA, Locale.CHINA);
     private HoyoToken token = HoyoToken.of(TestConstant.HSR_TOKEN_ID, TestConstant.HSR_TOKEN);
 
     @Test

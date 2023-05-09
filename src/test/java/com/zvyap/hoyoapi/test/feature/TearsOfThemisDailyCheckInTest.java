@@ -20,7 +20,6 @@ import java.util.Locale;
 public class TearsOfThemisDailyCheckInTest {
 
     private HoyoverseAPI osAPI = new HoyoverseAPI(APIEnvironment.OVERSEA);
-    private HoyoverseAPI osCHINA = new HoyoverseAPI(APIEnvironment.CHINA, Locale.CHINA);
     private HoyoToken token = HoyoToken.of(TestConstant.TOT_TOKEN_ID, TestConstant.TOT_TOKEN); //ys
 
     @Test

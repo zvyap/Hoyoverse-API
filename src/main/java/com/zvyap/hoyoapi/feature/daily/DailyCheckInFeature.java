@@ -63,14 +63,35 @@ public class DailyCheckInFeature {
         return body;
     }
 
+    /**
+     * Get daily information of the account, contains day checked in, day missing etc
+     * Check out - {@link HoyoDailyCheckInInfoResponse}
+     *
+     * @param type GameType
+     * @param token HoyoToken
+     * @return The information of daily status
+     */
     public HoyoDailyCheckInInfoResponse getDailyInfo(@NotNull GameType type, @NotNull HoyoToken token) {
         return fetchDailyEndpoint(token, HttpMethod.GET, type, "info", HoyoDailyCheckInInfoResponse.class);
     }
 
+    /**
+     * Check in daily
+     *
+     * @param type GameType
+     * @param token HoyoToken
+     * @return The response of official API
+     */
     public HoyoDailyCheckInSignResponse signDaily(@NotNull GameType type, @NotNull HoyoToken token) {
         return fetchDailyEndpoint(token, HttpMethod.POST, type, "sign", HoyoDailyCheckInSignResponse.class);
     }
 
+    /**
+     * Get all reward of each day
+     *
+     * @param type GameType
+     * @return A response object contains all the reward
+     */
     public HoyoDailyCheckInRewardResponse getAllReward(@NotNull GameType type) {
         return fetchDailyEndpoint(null, HttpMethod.GET, type, "home", HoyoDailyCheckInRewardResponse.class);
     }

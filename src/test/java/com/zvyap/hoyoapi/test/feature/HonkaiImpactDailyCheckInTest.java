@@ -19,7 +19,6 @@ import java.util.Locale;
 @EnabledIf("com.zvyap.hoyoapi.test.TestConstant#isHonkaiEnabled")
 public class HonkaiImpactDailyCheckInTest {
     private HoyoverseAPI osAPI = new HoyoverseAPI(APIEnvironment.OVERSEA);
-    private HoyoverseAPI osCHINA = new HoyoverseAPI(APIEnvironment.CHINA, Locale.CHINA);
     private HoyoToken token = HoyoToken.of(TestConstant.HONKAI_TOKEN_ID, TestConstant.HONKAI_TOKEN); //04
 
     @Test

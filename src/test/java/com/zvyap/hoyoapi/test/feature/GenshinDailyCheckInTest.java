@@ -20,7 +20,6 @@ import java.util.Locale;
 public class GenshinDailyCheckInTest {
 
     private HoyoverseAPI osAPI = new HoyoverseAPI(APIEnvironment.OVERSEA);
-    private HoyoverseAPI osCHINA = new HoyoverseAPI(APIEnvironment.CHINA, Locale.CHINA);
     private HoyoToken token = HoyoToken.of(TestConstant.GENSHIN_TOKEN_ID, TestConstant.GENSHIN_TOKEN);
 
     @Test
