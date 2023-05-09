@@ -1,5 +1,7 @@
 # Hoyoverse Java API
 
+[jitpack]: https://img.shields.io/jitpack/version/zvyap/Hoyoverse-API?color=blue
+
 A Java library for Hoyoverse API
 
 ## Game supported

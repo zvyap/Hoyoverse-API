@@ -6,7 +6,9 @@ import com.zvyap.hoyoapi.HoyoToken;
 import com.zvyap.hoyoapi.HoyoverseAPI;
 import com.zvyap.hoyoapi.feature.daily.DailyCheckInFeature;
 import com.zvyap.hoyoapi.test.TestConstant;
+import com.zvyap.hoyoapi.test.TestUtils;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.condition.EnabledIf;
@@ -26,7 +28,7 @@ public class TearsOfThemisDailyCheckInTest {
         var feature = new DailyCheckInFeature(osAPI).getAllReward(GameType.TEARS_OF_THEMIS);
         Assertions.assertNotNull(feature);
 
-        System.out.println(feature.toString());
+        TestUtils.notNullAndPrint(feature);
     }
 
     @Test
@@ -34,14 +36,15 @@ public class TearsOfThemisDailyCheckInTest {
         var feature = new DailyCheckInFeature(osAPI).getDailyInfo(GameType.TEARS_OF_THEMIS, token);
         Assertions.assertNotNull(feature);
 
-        System.out.println(feature.toString());
+        TestUtils.notNullAndPrint(feature);
     }
 
     @Test
+    @Disabled
     public void osTearsOfThemisDailyCheckInSignDailyTest() {
         var feature = new DailyCheckInFeature(osAPI).signDaily(GameType.TEARS_OF_THEMIS, token);
         Assertions.assertNotNull(feature);
 
-        System.out.println(feature.toString());
+        TestUtils.notNullAndPrint(feature);
     }
 }

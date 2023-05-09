@@ -6,7 +6,9 @@ import com.zvyap.hoyoapi.HoyoToken;
 import com.zvyap.hoyoapi.HoyoverseAPI;
 import com.zvyap.hoyoapi.feature.daily.DailyCheckInFeature;
 import com.zvyap.hoyoapi.test.TestConstant;
+import com.zvyap.hoyoapi.test.TestUtils;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.condition.EnabledIf;
@@ -26,7 +28,7 @@ public class HonkaiStarRailDailyCheckInTest {
         var feature = new DailyCheckInFeature(osAPI).getAllReward(GameType.HONKAI_STAR_RAIL);
         Assertions.assertNotNull(feature);
 
-        System.out.println(feature.toString());
+        TestUtils.notNullAndPrint(feature);
     }
 
     @Test
@@ -34,14 +36,15 @@ public class HonkaiStarRailDailyCheckInTest {
         var feature = new DailyCheckInFeature(osAPI).getDailyInfo(GameType.HONKAI_STAR_RAIL, token);
         Assertions.assertNotNull(feature);
 
-        System.out.println(feature.toString());
+        TestUtils.notNullAndPrint(feature);
     }
 
     @Test
+    @Disabled
     public void osHSRDailyCheckInSignDailyTest() {
         var feature = new DailyCheckInFeature(osAPI).signDaily(GameType.HONKAI_STAR_RAIL, token);
         Assertions.assertNotNull(feature);
 
-        System.out.println(feature.toString());
+        TestUtils.notNullAndPrint(feature);
     }
 }
