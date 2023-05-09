@@ -25,7 +25,7 @@ A Java library for Hoyoverse API
 * Java 11 or newer
 
 ## How to use
-Add this project as your dependency, for more version or usage, check out -[JitPack](https://jitpack.io/#zvyap/Hoyoverse-API/)
+Add this project as your dependency, for more version or usage, check out - [JitPack](https://jitpack.io/#zvyap/Hoyoverse-API/)
 <br>
 For those who want use newest commit as your version, use ```master-SNAPSHOT``` as the project version
 
