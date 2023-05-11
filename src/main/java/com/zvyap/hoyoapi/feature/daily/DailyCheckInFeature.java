@@ -8,6 +8,7 @@ import com.zvyap.hoyoapi.HoyoverseAPI;
 import com.zvyap.hoyoapi.exception.AlreadyCheckInException;
 import com.zvyap.hoyoapi.exception.GameProfileNotFoundException;
 import com.zvyap.hoyoapi.exception.HoyoverseHttpRequestException;
+import com.zvyap.hoyoapi.feature.HoyoFeature;
 import com.zvyap.hoyoapi.http.ContentType;
 import com.zvyap.hoyoapi.http.HttpMethod;
 import com.zvyap.hoyoapi.http.JsonBodyHandler;
@@ -24,12 +25,10 @@ import java.net.http.HttpResponse;
 import java.util.Map;
 import java.util.function.Supplier;
 
-public class DailyCheckInFeature {
-
-    private HoyoverseAPI api;
+public class DailyCheckInFeature extends HoyoFeature {
 
     public DailyCheckInFeature(HoyoverseAPI api) {
-        this.api = api;
+        super(api);
     }
 
     private <T> T fetchDailyEndpoint(HoyoToken token, HttpMethod method, GameType type, String endpoint, Class<T> responseClass) {
