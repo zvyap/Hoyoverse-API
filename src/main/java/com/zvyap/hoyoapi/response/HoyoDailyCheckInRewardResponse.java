@@ -42,7 +42,7 @@ public class HoyoDailyCheckInRewardResponse extends HoyoAPIResponse {
 			return name;
 		}
 
-		public int getCnt(){
+		public int getCount() {
 			return cnt;
 		}
 
