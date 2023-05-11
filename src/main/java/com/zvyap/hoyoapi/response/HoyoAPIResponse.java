@@ -11,11 +11,15 @@ public class HoyoAPIResponse {
     @JsonProperty("retcode")
     protected int retcode;
 
-    public String getMessage(){
+    public String getMessage() {
         return message;
     }
 
-    public int getRetcode(){
+    public int getRetcode() {
         return retcode;
+    }
+
+    public boolean isSuccess() {
+        return retcode >= 0;
     }
 }

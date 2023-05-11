@@ -6,9 +6,7 @@ import com.zvyap.hoyoapi.HoyoToken;
 import com.zvyap.hoyoapi.HoyoverseAPI;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.condition.EnabledIf;
 
-@EnabledIf("com.zvyap.hoyoapi.test.TestConstant#isMainTestEnabled")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class APITest {
     private HoyoToken token = HoyoToken.of(TestConstant.GENSHIN_TOKEN_ID, TestConstant.GENSHIN_TOKEN);

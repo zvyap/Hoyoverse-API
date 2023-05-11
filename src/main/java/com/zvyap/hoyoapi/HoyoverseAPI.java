@@ -1,5 +1,6 @@
 package com.zvyap.hoyoapi;
 
+import com.zvyap.hoyoapi.annotation.OnlyAPI;
 import com.zvyap.hoyoapi.exception.HoyoverseAPIException;
 import com.zvyap.hoyoapi.exception.HoyoverseLoginFailedException;
 import com.zvyap.hoyoapi.exception.HoyoverseRequestFailedException;
@@ -8,10 +9,8 @@ import com.zvyap.hoyoapi.exception.SomethingWhenWrongException;
 import com.zvyap.hoyoapi.http.ContentType;
 import com.zvyap.hoyoapi.http.HttpMethod;
 import com.zvyap.hoyoapi.http.JsonBodyHandler;
-import com.zvyap.hoyoapi.response.HoyoAPIResponse;
-import com.zvyap.hoyoapi.response.HoyoGetForumFullUserResponse;
-import com.zvyap.hoyoapi.response.HoyoGetUserAccountInfoResponse;
-import com.zvyap.hoyoapi.response.HoyoGetUserGameRolesResponse;
+import com.zvyap.hoyoapi.http.JsonPublisher;
+import com.zvyap.hoyoapi.response.*;
 import com.zvyap.hoyoapi.util.Utils;
 import lombok.Getter;
 import lombok.extern.java.Log;
@@ -31,6 +30,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.CompletableFuture;
@@ -257,6 +257,56 @@ public class HoyoverseAPI {
                 buildRequest(URI.create(getEnvironment().getAccountAPIConstant().getUserAccountInfoEndpoint()),
                         HttpMethod.GET, ContentType.HOYO_API),
                 JsonBodyHandler.of(HoyoGetUserAccountInfoResponse.class)).body().get();
+    }
+
+    /**
+     * Get game basic details, such as: icon, name(follow {@link APILocale})
+     *
+     * @return A list of GameDetails
+     */
+    @NotNull
+    @OnlyAPI(env = APIEnvironment.OVERSEA)
+    public List<HoyoGamesDetailsResponse.GameDetails> getGameDetails() {
+        return makeRequest(null,
+                buildRequest(URI.create(APIEnvironment.OVERSEA.getAccountAPIConstant().getGamesDetailsEndpoint()),
+                        HttpMethod.GET, ContentType.HOYO_API,
+                        "x-rpc-client_type", "4",
+                        "x-rpc-language", lang),
+                JsonBodyHandler.of(HoyoGamesDetailsResponse.class)).body().get().getData().getGameList();
+    }
+
+    /**
+     * Get game basic details, such as: icon, name(follow {@link APILocale})
+     *
+     * @param type The GameType for filter game you want
+     * @return GameDetails
+     */
+    @NotNull
+    @OnlyAPI(env = APIEnvironment.OVERSEA)
+    public HoyoGamesDetailsResponse.GameDetails getGameDetails(GameType type) {
+        for (HoyoGamesDetailsResponse.GameDetails details : getGameDetails()) {
+            if (details.getId().equals(String.valueOf(type.getGameId()))) {
+                return details;
+            }
+        }
+        return null; //Should not be happened if game already released
+    }
+
+    /**
+     * Get Miyoushe tools navigators
+     *
+     * @param type The GameType for filter game you want
+     * @return GameDetails
+     */
+    @NotNull
+    @OnlyAPI(env = APIEnvironment.CHINA)
+    public MYSNavigatorsResponse.Data getNavigators(GameType type) {
+        return makeRequest(null,
+                buildRequest(URI.create(APIEnvironment.CHINA.getAccountAPIConstant().getNavigatorsEndpoint()),
+                        HttpMethod.POST, ContentType.HOYO_API,
+                        JsonPublisher.of(Map.of("game_id", type.getGameId(), "types", List.of(4, 5))),
+                        "x-rpc-client_type", "4"),
+                JsonBodyHandler.of(MYSNavigatorsResponse.class)).body().get().getData();
     }
 
     @NotNull

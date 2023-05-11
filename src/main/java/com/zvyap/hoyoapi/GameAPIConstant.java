@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 public class GameAPIConstant {
 
     private GameType gameType;
+    private String name;
     private String apiUrl;
 
     private String dailyCheckInApiEndpoint;
