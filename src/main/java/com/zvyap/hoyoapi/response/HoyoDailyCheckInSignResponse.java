@@ -12,16 +12,20 @@ public class HoyoDailyCheckInSignResponse extends HoyoAPIResponse {
 	}
 
 	@Override
- 	public String toString(){
-		return 
-			"HoyoDailyCheckInSignResponse{" + 
-			"data = '" + data + '\'' + 
-			",message = '" + message + '\'' + 
-			",retcode = '" + retcode + '\'' + 
-			"}";
-		}
+	public String toString() {
+		return
+				"HoyoDailyCheckInSignResponse{" +
+						"data = '" + data + '\'' +
+						",message = '" + message + '\'' +
+						",retcode = '" + retcode + '\'' +
+						"}";
+	}
 
-	public static class Data{
+	public boolean isCaptcha() {
+		return isSuccess() ? getData().isRisk() : false;
+	}
+
+	public static class Data {
 
 		@JsonProperty("gt_result")
 		private GtResult gtResult;

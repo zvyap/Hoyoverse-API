@@ -47,15 +47,22 @@ public class HoyoDailyCheckInInfoResponse extends HoyoAPIResponse {
 		@JsonProperty("first_bind")
 		private boolean isFirstBind;
 
-		public boolean isSub(){
+		@JsonProperty("month_last_day")
+		private boolean isMonthLastDay;
+
+		public boolean isMonthLastDay() {
+			return isMonthLastDay;
+		}
+
+		public boolean isSub() {
 			return isSub;
 		}
 
-		public String getToday(){
+		public String getToday() {
 			return today;
 		}
 
-		public int getShortSignDay(){
+		public int getShortSignDay() {
 			return shortSignDay;
 		}
 
@@ -82,15 +89,16 @@ public class HoyoDailyCheckInInfoResponse extends HoyoAPIResponse {
 		@Override
 		 public String toString(){
 			return
-				"Data{" +
-				"is_sub = '" + isSub + '\'' +
-				",today = '" + today + '\'' +
-				",short_sign_day = '" + shortSignDay + '\'' +
-				",sign_cnt_missed = '" + signCntMissed + '\'' +
-				",region = '" + region + '\'' +
-				",is_sign = '" + isSign + '\'' +
-				",total_sign_day = '" + totalSignDay + '\'' +
-				"}";
+					"Data{" +
+							"is_sub = '" + isSub + '\'' +
+							",today = '" + today + '\'' +
+							",short_sign_day = '" + shortSignDay + '\'' +
+							",sign_cnt_missed = '" + signCntMissed + '\'' +
+							",region = '" + region + '\'' +
+							",is_sign = '" + isSign + '\'' +
+							",total_sign_day = '" + totalSignDay + '\'' +
+							",month_last_day = '" + isMonthLastDay + '\'' +
+							"}";
 			}
 	}
 }
