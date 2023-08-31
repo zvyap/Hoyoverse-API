@@ -13,8 +13,8 @@ public enum APIEnvironment {
             GameAPIConstant.builder()
                     .gameType(GameType.GENSHIN_IMPACT)
                     .name("Genshin Impact")
-                    .apiUrl("https://hk4e-api-os.hoyoverse.com")
-                    .dailyCheckInApiEndpoint("https://hk4e-api-os.hoyoverse.com/event/sol")
+                    .apiUrl("https://sg-hk4e-api.hoyolab.com")
+                    .dailyCheckInApiEndpoint("https://sg-hk4e-api.hoyolab.com/event/sol")
                     .dailyCheckInActId("e202102251931481")
                     .gameBiz("hk4e_global")
                     .build(),
