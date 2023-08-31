@@ -64,8 +64,8 @@ public class DailyCheckInFeature extends HoyoFeature {
     private String[] headers() {
         if (api.getEnvironment() == APIEnvironment.OVERSEA) {
             return new String[]{"Accept-Language", "en-US,en;q=0.5",
-                    "Origin", "https://webstatic-sea.mihoyo.com", "Connection", "keep-alive",
-                    "Referer", "https://webstatic-sea.mihoyo.com/ys/event/signin-sea/index.html?act_id={config[\"ACT_ID\"]}&lang=en-us",
+                    "Origin", "https://act.hoyolab.com",
+                    "Referer", "https://act.hoyolab.com/ys/event/signin-sea-v3/index.html?act_id=e202102251931481&lang=en-us",
                     "Cache-Control", "max-age=0"};
         } else {
             return new String[]{
