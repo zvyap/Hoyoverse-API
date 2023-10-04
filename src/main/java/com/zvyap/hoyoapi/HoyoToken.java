@@ -1,8 +1,8 @@
 package com.zvyap.hoyoapi;
 
 public class HoyoToken {
-    private final String ltoken;
-    private final String ltuid;
+    protected final String ltoken;
+    protected final String ltuid;
 
     public HoyoToken(String ltuid, String ltoken) {
         this.ltoken = ltoken;
@@ -10,6 +10,9 @@ public class HoyoToken {
     }
 
     public static HoyoToken of(String ltuid, String ltoken) {
+        if(ltoken.startsWith("v2_")) {
+            return new HoyoTokenV2(ltuid, ltoken);
+        }
         return new HoyoToken(ltuid, ltoken);
     }
 
