@@ -81,7 +81,13 @@ public class HoyoDailyCheckInSignResponse extends HoyoAPIResponse {
 		}
 
 		public boolean isRisk(){
-			return isRisk != null ? isRisk : getGtResult().isRisk();
+			if(isRisk != null) {
+				return isRisk;
+			}
+			if(getGtResult() == null) { //honkai impact 3, does return gtresult
+				return !getCode().equals("ok");
+			}
+			return getGtResult().isRisk();
 		}
 
 		@Override
