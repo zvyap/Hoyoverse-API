@@ -40,6 +40,7 @@ import java.util.function.Supplier;
 public class HoyoverseAPI {
     //Allow function of tryToAllowRestrictedHeader, this is not required anymore.
     private static final boolean CRACK_HEADER = false;
+    private static final APILocale DEFAULT_LOCALE = APILocale.EN_US;
 
     private static HoyoverseAPI globalInstance;
 
@@ -49,7 +50,12 @@ public class HoyoverseAPI {
     }
 
     @NotNull
-    public static HoyoverseAPI buildGlobalInstance(APIEnvironment environment, APILocale locale) {
+    public static HoyoverseAPI buildGlobalInstance(@NotNull APIEnvironment environment) {
+        return buildGlobalInstance(environment, null);
+    }
+
+    @NotNull
+    public static HoyoverseAPI buildGlobalInstance(@NotNull APIEnvironment environment, @Nullable APILocale locale) {
         if (globalInstance == null) {
             globalInstance = new HoyoverseAPI(environment, locale);
         }
@@ -68,16 +74,16 @@ public class HoyoverseAPI {
     /**
      * @param environment APIEnvironment
      */
-    public HoyoverseAPI(APIEnvironment environment) {
-        this(environment, APILocale.EN_US);
+    public HoyoverseAPI(@NotNull APIEnvironment environment) {
+        this(environment, null);
     }
 
 
     /**
      * @param environment APIEnvironment
-     * @param locale APILocale
+     * @param locale      APILocale
      */
-    public HoyoverseAPI(APIEnvironment environment, APILocale locale) {
+    public HoyoverseAPI(@NotNull APIEnvironment environment, @Nullable APILocale locale) {
         tryToAllowRestrictedHeader();
         this.httpClient = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_2)
@@ -85,14 +91,14 @@ public class HoyoverseAPI {
                 .build();
         this.environment = environment;
         if (locale == null) {
-            locale = APILocale.EN_US;
+            locale = DEFAULT_LOCALE;
         }
         this.lang = locale.getValue();
 
     }
 
     private void tryToAllowRestrictedHeader() {
-        if(!CRACK_HEADER) {
+        if (!CRACK_HEADER) {
             return; //NOP
         }
         if (Runtime.version().feature() < 11) {
@@ -148,7 +154,7 @@ public class HoyoverseAPI {
      * Get game roles with some filter
      *
      * @param token HoyoToken
-     * @param type GameType
+     * @param type  GameType
      * @return A list of game roles of the game type with all region
      */
     @NotNull
@@ -160,8 +166,8 @@ public class HoyoverseAPI {
      * Get game role by UID with GameType filter
      *
      * @param token HoyoToken
-     * @param type GameType
-     * @param uid In game UID
+     * @param type  GameType
+     * @param uid   In game UID
      * @return Game role information
      */
     @Nullable
@@ -178,7 +184,7 @@ public class HoyoverseAPI {
      * Get game role by UID
      *
      * @param token HoyoToken
-     * @param uid In game UID
+     * @param uid   In game UID
      * @return Game role information
      */
     @Nullable
@@ -189,8 +195,8 @@ public class HoyoverseAPI {
     /**
      * Get game role with filter
      *
-     * @param token HoyoToken
-     * @param type GameType
+     * @param token  HoyoToken
+     * @param type   GameType
      * @param region ServerRegion
      * @return Game role information
      */
@@ -207,7 +213,7 @@ public class HoyoverseAPI {
     /**
      * Get game role with filter
      *
-     * @param token HoyoToken
+     * @param token  HoyoToken
      * @param region ServerRegion
      * @return
      */
@@ -224,7 +230,7 @@ public class HoyoverseAPI {
 
     /**
      * Get user forum profile via account Id
-     *
+     * <p>
      * WARN: This request is fat, be careful
      *
      * @param accountId You can get this in url when you visit a user profile in forum, same as {@link HoyoToken#getLtuid()}
@@ -237,7 +243,7 @@ public class HoyoverseAPI {
 
     /**
      * Get user forum profile via token object
-     *
+     * <p>
      * WARN: This request is fat, be careful
      *
      * @param token HoyoToken, see also {@link this#getForumUser(String)}
@@ -251,7 +257,7 @@ public class HoyoverseAPI {
     /**
      * Get account information of this token
      * Note: Some sensitive data such as: [username, email] will be blur
-     *
+     * <p>
      * For example: abc*****@gmail.com, ab****g
      *
      * @param token
