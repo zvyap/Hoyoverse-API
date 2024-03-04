@@ -7,6 +7,9 @@ plugins {
 group 'com.zvyap'
 version = "${getProjectVersion()}"
 
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
 repositories {
     mavenCentral()
 }
@@ -31,10 +34,6 @@ test {
     systemProperty 'GLOBAL_TOKEN', System.getenv("GLOBAL_TOKEN")
     systemProperty 'GLOBAL_TOKEN_ID', System.getenv("GLOBAL_TOKEN_ID")
     useJUnitPlatform()
-}
-
-tasks.withType(SourceSet) {
-    encoding = 'UTF-8'
 }
 
 jar.mustRunAfter clean
