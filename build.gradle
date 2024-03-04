@@ -23,10 +23,19 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
+tasks.withType(Test) {
+    enabled = System.getenv('GLOBAL_TOKEN') != null && System.getenv('GLOBAL_TOKEN_ID') != null
+}
+
 test {
+    systemProperty 'GLOBAL_TOKEN', System.getenv("GLOBAL_TOKEN")
+    systemProperty 'GLOBAL_TOKEN_ID', System.getenv("GLOBAL_TOKEN_ID")
     useJUnitPlatform()
 }
 
+tasks.withType(SourceSet) {
+    encoding = 'UTF-8'
+}
 
 jar.mustRunAfter clean
 publishToMavenLocal.dependsOn jar
