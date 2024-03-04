@@ -12,14 +12,21 @@ A Java library for Hoyoverse API
 * Tears of Themis
 
 ### **Oversea & China's server** ***supported***
+> [!NOTE]
+> Some features may not be available in China's server due to I did not have a actual China MYS account to test it
 
 ## Features
 * Daily check in
 * Get game character basic information (uid, level, etc)
+* Get others/self forum user data
+* Get self accounting data
+* Multiple user support without recreating the main instance
 * MultiInstance of the library
 
 ## Work In Progress Features
-* Get information - resin, teapot, daily, etc
+* Get information - resin, teapot, daily, opened chest, etc
+* Get game content details information (weapon, artifact, charactor, etc)
+* Battle Chronicle with abyss, TCG data support
 
 ## Requirements
 * Java 11 or newer
@@ -63,6 +70,6 @@ dependencies {
 
 ## Build yourself
 ```
-gradlew build -x test
+gradlew build
 ```
 The jar file will spawn at **./build/libs/**
