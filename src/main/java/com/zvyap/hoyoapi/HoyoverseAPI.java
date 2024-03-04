@@ -38,6 +38,9 @@ import java.util.function.Supplier;
 
 @Log
 public class HoyoverseAPI {
+    //Allow function of tryToAllowRestrictedHeader, this is not required anymore.
+    private static final boolean CRACK_HEADER = false;
+
     private static HoyoverseAPI globalInstance;
 
     @Nullable
@@ -75,7 +78,7 @@ public class HoyoverseAPI {
      * @param locale APILocale
      */
     public HoyoverseAPI(APIEnvironment environment, APILocale locale) {
-        tryToAllowRestricedHeader();
+        tryToAllowRestrictedHeader();
         this.httpClient = HttpClient.newBuilder()
                 .version(HttpClient.Version.HTTP_2)
                 .cookieHandler(new CookieManager(null, CookiePolicy.ACCEPT_NONE))
@@ -88,7 +91,10 @@ public class HoyoverseAPI {
 
     }
 
-    private void tryToAllowRestricedHeader() {
+    private void tryToAllowRestrictedHeader() {
+        if(!CRACK_HEADER) {
+            return; //NOP
+        }
         if (Runtime.version().feature() < 11) {
             throw new UnsupportedOperationException("Invalid java version " + Runtime.version().feature() + " [Only Java 11+ is supported]");
         }
