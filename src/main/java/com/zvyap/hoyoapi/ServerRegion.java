@@ -1,7 +1,10 @@
 package com.zvyap.hoyoapi;
 
+import com.zvyap.hoyoapi.annotation.CaseSensitive;
 import com.zvyap.hoyoapi.util.Utils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
@@ -61,10 +64,12 @@ public enum ServerRegion {
         this.region = region;
     }
 
+    @NotNull
     public Map<GameType, String> getRegionString() {
         return region;
     }
 
+    @NotNull
     public String getRegion(GameType gameType) {
         return getRegionString().get(gameType);
     }
@@ -90,6 +95,17 @@ public enum ServerRegion {
             return true;
         }
         return false;
+    }
+
+    //Although the id will not repeat, it is better to use the gameType to validate and get the region
+    @Nullable
+    public static ServerRegion getRegionFromId(GameType gameType, @CaseSensitive String id) {
+        for(ServerRegion serverRegion : values()) {
+            if(serverRegion.getRegion(gameType).equals(id)) {
+                return serverRegion;
+            }
+        }
+        return null;
     }
 
     public boolean match(GameType gameType, String region) {
