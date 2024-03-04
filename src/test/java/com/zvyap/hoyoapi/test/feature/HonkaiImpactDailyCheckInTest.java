@@ -23,26 +23,26 @@ public class HonkaiImpactDailyCheckInTest {
 
     @Test
     public void osHonkaiImpactDailyCheckInGetRewardTest() {
-        var feature = new DailyCheckInFeature(osAPI).getAllReward(GameType.HONKAI_IMPACT_3RD);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).getAllReward(GameType.HONKAI_IMPACT_3RD);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 
     @Test
     public void osHonkaiImpactDailyCheckInGetDailyInfoTest() {
-        var feature = new DailyCheckInFeature(osAPI).getDailyInfo(GameType.HONKAI_IMPACT_3RD, token);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).getDailyInfo(GameType.HONKAI_IMPACT_3RD, token);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 
     @Test
     @Disabled
     public void osHonkaiImpactDailyCheckInSignDailyTest() {
-        var feature = new DailyCheckInFeature(osAPI).signDaily(GameType.HONKAI_IMPACT_3RD, token);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).signDaily(GameType.HONKAI_IMPACT_3RD, token);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 }

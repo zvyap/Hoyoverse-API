@@ -24,26 +24,26 @@ public class GenshinDailyCheckInTest {
 
     @Test
     public void osGenshinDailyCheckInGetRewardTest() {
-        var feature = new DailyCheckInFeature(osAPI).getAllReward(GameType.GENSHIN_IMPACT);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).getAllReward(GameType.GENSHIN_IMPACT);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 
     @Test
     public void osGenshinDailyCheckInGetDailyInfoTest() {
-        var feature = new DailyCheckInFeature(osAPI).getDailyInfo(GameType.GENSHIN_IMPACT, token);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).getDailyInfo(GameType.GENSHIN_IMPACT, token);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 
     @Test
     @Disabled
     public void osGenshinDailyCheckInSignDailyTest() {
-        var feature = new DailyCheckInFeature(osAPI).signDaily(GameType.GENSHIN_IMPACT, token);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).signDaily(GameType.GENSHIN_IMPACT, token);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 }

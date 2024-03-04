@@ -24,26 +24,26 @@ public class TearsOfThemisDailyCheckInTest {
 
     @Test
     public void osTearsOfThemisDailyCheckInGetRewardTest() {
-        var feature = new DailyCheckInFeature(osAPI).getAllReward(GameType.TEARS_OF_THEMIS);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).getAllReward(GameType.TEARS_OF_THEMIS);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 
     @Test
     public void osTearsOfThemisDailyCheckInGetDailyInfoTest() {
-        var feature = new DailyCheckInFeature(osAPI).getDailyInfo(GameType.TEARS_OF_THEMIS, token);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).getDailyInfo(GameType.TEARS_OF_THEMIS, token);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 
     @Test
     @Disabled
     public void osTearsOfThemisDailyCheckInSignDailyTest() {
-        var feature = new DailyCheckInFeature(osAPI).signDaily(GameType.TEARS_OF_THEMIS, token);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).signDaily(GameType.TEARS_OF_THEMIS, token);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 }

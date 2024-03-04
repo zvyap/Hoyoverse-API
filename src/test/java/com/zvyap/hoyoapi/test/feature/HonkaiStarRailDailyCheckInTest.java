@@ -24,26 +24,26 @@ public class HonkaiStarRailDailyCheckInTest {
 
     @Test
     public void osHSRDailyCheckInGetRewardTest() {
-        var feature = new DailyCheckInFeature(osAPI).getAllReward(GameType.HONKAI_STAR_RAIL);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).getAllReward(GameType.HONKAI_STAR_RAIL);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 
     @Test
     public void osHSRDailyCheckInGetDailyInfoTest() {
-        var feature = new DailyCheckInFeature(osAPI).getDailyInfo(GameType.HONKAI_STAR_RAIL, token);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).getDailyInfo(GameType.HONKAI_STAR_RAIL, token);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 
     @Test
     @Disabled
     public void osHSRDailyCheckInSignDailyTest() {
-        var feature = new DailyCheckInFeature(osAPI).signDaily(GameType.HONKAI_STAR_RAIL, token);
-        Assertions.assertNotNull(feature);
+        var response = new DailyCheckInFeature(osAPI).signDaily(GameType.HONKAI_STAR_RAIL, token);
+        Assertions.assertNotNull(response);
 
-        TestUtils.notNullAndPrint(feature);
+        TestUtils.notNullAndPrint(response);
     }
 }
