@@ -5,7 +5,8 @@ public enum GameType {
     HONKAI_IMPACT_3RD(1),
     HONKAI_STAR_RAIL(6),
     TEARS_OF_THEMIS(4),
-    ZENLESS_ZONE_ZERO(8); //unimplemented yet
+    /** Not implemented on {@link APIEnvironment#CHINA} yet. */
+    ZENLESS_ZONE_ZERO(8);
 
     private final int gameId;
 

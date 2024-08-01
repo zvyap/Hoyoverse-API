@@ -41,8 +41,15 @@ public enum APIEnvironment {
                     .dailyCheckInApiEndpoint("https://sg-public-api.hoyolab.com/event/luna/os")
                     .dailyCheckInActId("e202202281857121")
                     .gameBiz("nxx_global")
+                    .build(),
+            GameAPIConstant.builder()
+                    .gameType(GameType.ZENLESS_ZONE_ZERO)
+                    .name("Zenless Zone Zero")
+                    .apiUrl("https://sg-act-nap-api.hoyolab.com")
+                    .dailyCheckInApiEndpoint("https://sg-act-nap-api.hoyolab.com/event/luna/zzz/os")
+                    .dailyCheckInActId("e202406031448091")
+                    .gameBiz("nap_global")
                     .build()),
-    //Zenless Zone Zero id - 8
 
     CHINA(AccountAPIConstant.builder()
             .userGameRoleEndpoint("https://api-takumi.mihoyo.com/binding/api/getUserGameRolesByLtoken")
@@ -81,6 +88,15 @@ public enum APIEnvironment {
                     .dailyCheckInApiEndpoint("https://api-takumi.mihoyo.com/event/luna")
                     .dailyCheckInActId("e202202251749321")
                     .gameBiz("nxx_cn")
+                    .build(),
+            // TODO: implement urls
+            GameAPIConstant.builder()
+                    .gameType(GameType.ZENLESS_ZONE_ZERO)
+                    .name("绝区零")
+                    .apiUrl("")
+                    .dailyCheckInApiEndpoint("")
+                    .dailyCheckInActId("")
+                    .gameBiz("nap_cn")
                     .build());
 
     private final AccountAPIConstant accountAPIConstant;
@@ -88,13 +104,15 @@ public enum APIEnvironment {
     public final GameAPIConstant HONKAI_IMPACT_3RD;
     public final GameAPIConstant HONKAI_STAR_RAIL;
     public final GameAPIConstant TEARS_OF_THEMIS;
+    public final GameAPIConstant ZENLESS_ZONE_ZERO;
 
-    APIEnvironment(AccountAPIConstant accountAPIConstant, GameAPIConstant GENSHIN, GameAPIConstant HONKAI_IMPACT_3RD, GameAPIConstant HONKAI_STAR_RAIL, GameAPIConstant TEARS_OF_THEMIS) {
+    APIEnvironment(AccountAPIConstant accountAPIConstant, GameAPIConstant GENSHIN, GameAPIConstant HONKAI_IMPACT_3RD, GameAPIConstant HONKAI_STAR_RAIL, GameAPIConstant TEARS_OF_THEMIS, GameAPIConstant ZENLESS_ZONE_ZERO) {
         this.accountAPIConstant = accountAPIConstant;
         this.GENSHIN = GENSHIN;
         this.HONKAI_IMPACT_3RD = HONKAI_IMPACT_3RD;
         this.HONKAI_STAR_RAIL = HONKAI_STAR_RAIL;
         this.TEARS_OF_THEMIS = TEARS_OF_THEMIS;
+        this.ZENLESS_ZONE_ZERO = ZENLESS_ZONE_ZERO;
     }
 
     public AccountAPIConstant getAccountAPIConstant() {
@@ -102,7 +120,7 @@ public enum APIEnvironment {
     }
 
     public GameAPIConstant[] getAllAPIConstant() {
-        return new GameAPIConstant[] {GENSHIN, HONKAI_IMPACT_3RD, HONKAI_STAR_RAIL, TEARS_OF_THEMIS};
+        return new GameAPIConstant[] {GENSHIN, HONKAI_IMPACT_3RD, HONKAI_STAR_RAIL, TEARS_OF_THEMIS, ZENLESS_ZONE_ZERO};
     }
 
     public GameAPIConstant getAPIConstant(GameType gameType) {
@@ -115,6 +133,8 @@ public enum APIEnvironment {
                 return HONKAI_STAR_RAIL;
             case TEARS_OF_THEMIS:
                 return TEARS_OF_THEMIS;
+            case ZENLESS_ZONE_ZERO:
+                return ZENLESS_ZONE_ZERO;
             default:
                 throw new HoyoverseAPIMissingException("GameAPIConstant");
         }

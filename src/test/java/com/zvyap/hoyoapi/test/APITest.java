@@ -18,6 +18,7 @@ public class APITest {
         TestUtils.notNullAndPrint(api.getGameRoles(token, GameType.HONKAI_IMPACT_3RD));
         TestUtils.notNullAndPrint(api.getGameRoles(token, GameType.HONKAI_STAR_RAIL));
         TestUtils.notNullAndPrint(api.getGameRoles(token, GameType.TEARS_OF_THEMIS));
+        TestUtils.notNullAndPrint(api.getGameRoles(token, GameType.ZENLESS_ZONE_ZERO));
     }
 
     @Test
